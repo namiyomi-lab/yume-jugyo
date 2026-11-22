@@ -532,8 +532,10 @@
   let dragStart = null; let stentPos = {x:0, y:0}; let stentHome = {x:0, y:0};
 
   function toSVG(evt){
-    const r = svg.getBoundingClientRect();
-    return { x: (evt.clientX - r.left) * 1180 / r.width, y: (evt.clientY - r.top) * 430 / r.height };
+    const pt = svg.createSVGPoint();
+    pt.x = evt.clientX; pt.y = evt.clientY;
+    const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    return { x: p.x, y: p.y };
   }
   function setCath(x){
     cathX = Math.max(0, Math.min(CATH_MAX, x));
@@ -771,9 +773,10 @@
   document.getElementById('againBtn').addEventListener('click', () => location.reload());
 
   function toSVG(svgEl, e){
-    const r = svgEl.getBoundingClientRect();
-    const vb = svgEl.viewBox.baseVal;
-    return { x: (e.clientX - r.left) * vb.width / r.width, y: (e.clientY - r.top) * vb.height / r.height };
+    const pt = svgEl.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    const p = pt.matrixTransform(svgEl.getScreenCTM().inverse());
+    return { x: p.x, y: p.y };
   }
   const SVGNS = 'http://www.w3.org/2000/svg';
   function dragLayer(svgEl, layer, makeEl, home, onDone){
