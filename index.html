@@ -140,6 +140,10 @@
   .ecg-over .ecg-line { stroke:#fff; opacity:.65; }
   #rotHint { display:none; position:fixed; left:50%; transform:translateX(-50%); bottom:16px; z-index:300; background:#17456e; color:#fff; font-weight:800; font-size:14px; padding:11px 20px; border-radius:999px; box-shadow:0 4px 14px rgba(23,69,110,.35); white-space:nowrap; }
   @media (orientation:portrait) and (max-width:700px) { #rotHint { display:block; } }
+  @media (orientation:landscape) and (max-height:520px) {
+    .deck { aspect-ratio:auto; height:calc(100dvh - 172px); }
+    .hero img { height:36dvh; }
+  }
   @media (max-width:640px) {
     .bignum { font-size:56px; }
     .bignum .u { font-size:19px; margin-left:8px; }
